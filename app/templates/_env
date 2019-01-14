@@ -1,7 +1,3 @@
 COOKIE_SECRET=<%= cookieSecret %>
-<% if (cloudinaryURL) { %>CLOUDINARY_URL=<%= cloudinaryURL %>
-<% } if (includeEmail) { if (mailgunAPI && mailgunDomain) { %>MAILGUN_API_KEY=<%= mailgunAPI %>
-MAILGUN_DOMAIN=<%= mailgunDomain %><% } else { %>
-# You will need to provide a MAILGUN_API_KEY and MAILGUN_DOMAIN to
-# get email sending working.
-<% } } %>
+<% if (cloudinaryURL) { %>CLOUDINARY_URL=<%= cloudinaryURL %><% } %>
+MANDRILL_API_KEY=tqcMkg939Aqp1xMvc1UAkg

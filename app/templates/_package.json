@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "keystone": "^4.0.0",
+    "keystone": "git+https://github.com/yazevedopure/keystone.git",
     "lodash": "^4.13.1",<% if (viewEngine === 'hbs') { %>
     "moment": "2.17.1",
     "cloudinary": "1.7.0",

@@ -106,48 +106,48 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 		project: [
 			{
 				name: 'projectName',
-				message: 'What is the name of your project?',
+				message: 'Qual\'è il nome del progetto?',
 				default: 'My Site',
 			}, {
 				name: 'viewEngine',
-				message: 'Would you like to use Pug, Nunjucks, Twig or Handlebars for templates? ' + (('[pug | nunjucks | twig | hbs]').grey),
+				message: 'Quale template engine vuoi usare? Pug, Nunjucks, Twig or Handlebars ' + (('[pug | nunjucks | twig | hbs]').grey),
 				default: 'pug',
 			}, {
 				name: 'preprocessor',
-				message: 'Which CSS pre-processor would you like? ' + (('[less | sass | stylus]').grey),
-				default: 'less',
+				message: 'Quale CSS pre-processor vuoi usare? ' + (('[less | sass | stylus]').grey),
+				default: 'sass',
 			}, {
 				type: 'confirm',
 				name: 'includeBlog',
-				message: 'Would you like to include a Blog?',
+				message: 'Vuoi includere un Blog?',
 				default: true,
 			}, {
 				type: 'confirm',
 				name: 'includeGallery',
-				message: 'Would you like to include an Image Gallery?',
+				message: 'Vuoi includere una Image Gallery?',
 				default: true,
 			}, {
 				type: 'confirm',
 				name: 'includeEnquiries',
-				message: 'Would you like to include a Contact Form?',
+				message: 'Vuoi includere un Contact Form?',
 				default: true,
 			}, {
 				name: 'userModel',
-				message: 'What would you like to call the User model?',
+				message: 'Che nome vuoi dare al modello User?',
 				default: 'User',
 			}, {
 				name: 'adminLogin',
-				message: 'Enter an email address for the first Admin user:',
-				default: 'user@keystonejs.com',
+				message: 'Inserisci una mail per l\'utente Admin:',
+				default: 'idiotest@nsi.it',
 			}, {
 				name: 'adminPassword',
-				message: 'Enter a password for the first Admin user:'
+				message: 'Inserisci una password per l\'utente Admin:'
 					+ '\n Please use a temporary password as it will be saved in plain text and change it after the first login.',
-				default: 'admin',
+				default: 'Idio123-',
 			}, {
 				type: 'confirm',
 				name: 'newDirectory',
-				message: 'Would you like to create a new directory for your project?',
+				message: 'Vuoi creare una nuova directory per il progetto?',
 				default: true,
 			}, {
 				type: 'confirm',
@@ -267,7 +267,7 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 
 			if (!this.cloudinaryURL && (this.includeBlog || this.includeGallery)) {
 				this.usingDemoCloudinaryAccount = true;
-				this.cloudinaryURL = 'cloudinary://333779167276662:_8jbSi9FB3sWYrfimcl8VKh34rI@keystone-demo';
+				this.cloudinaryURL = 'cloudinary://719553377588792:u3lHeoTDWp5xIsNU7W841_aTUV4@nsi-cdn';
 			}
 
 			cb();
