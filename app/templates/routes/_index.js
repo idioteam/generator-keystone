@@ -33,6 +33,12 @@ var routes = {
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
+
+	//	Rimozione trailing slashes con redirect 301
+	app.get('\\S+\/$', function (req, res) {
+		return res.redirect(301, req.path.slice(0, -1) + req.url.slice(req.path.length));
+	});
+	
 	// Views
 	app.get('/', routes.views.index);
 <% if (includeBlog) { %>	app.get('/blog/:category?', routes.views.blog);
