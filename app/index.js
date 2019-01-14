@@ -356,6 +356,7 @@ KeystoneGenerator.prototype.routes = function routes () {
 
 	this.mkdir('routes');
 	this.mkdir('routes/views');
+	this.mkdir('routes/middlewares/pug');
 
 	this.template('routes/_index.js', 'routes/index.js');
 	this.template('routes/_middleware.js', 'routes/middleware.js');
@@ -365,6 +366,8 @@ KeystoneGenerator.prototype.routes = function routes () {
 	}
 
 	this.copy('routes/views/index.js');
+	this.copy('routes/middlewares/pug/index.js');
+	this.copy('routes/middlewares/pug/lazyload/index.js');
 
 	if (this.includeBlog) {
 		this.copy('routes/views/blog.js');
