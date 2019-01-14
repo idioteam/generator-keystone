@@ -1,14 +1,17 @@
 include ../mixins/flash-messages
 
 doctype html
-html
+html(lang='it')
 
 	//- HTML HEADER
 	head
+		link(rel='dns-prefetch' href='//res.cloudinary.com')
+		link(rel='dns-prefetch' href='//fonts.googleapis.com')
+		link(rel='dns-prefetch' href='//maps.googleapis.com')
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		meta(http-equiv="X-UA-Compatible" content="IE=edge")
-
+		meta(name="description" content=description)
 		title= title || '<%= projectName %>'
 		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
 
@@ -17,7 +20,7 @@ html
 		link(href="/styles/site<% if (preprocessor === 'less') { %>.min<% } %>.css", rel="stylesheet")
 
 		//- This file provides the default styling for the KeystoneJS Content Editor
-		if user && user.canAccessKeystone
+		//- if user && user.canAccessKeystone
 			link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
 
 		//- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -37,6 +40,19 @@ html
 	body
 
 		//- HEADER
+		header
+			nav.navbar.navbar-expand-md.fixed-top
+				a.navbar-brand(href='#') <%= _projectName %>
+				button.navbar-toggler(type='button' data-toggle='offcanvas')
+					span.navbar-toggler-icon
+				.offcanvas-collapse.navbar-collapse#navbar_collapse
+					ul.navbar-nav.mr-auto
+						each link in navLinks
+							li.nav-item(class=(section === link.key ? 'active' : null))
+								a.nav-link(href=link.href)= link.label
+								if section === link.key
+									span.sr-only (current)
+									
 		#header: .container
 
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
@@ -86,6 +102,10 @@ html
 
 			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
 			p Powered by <a href="https://keystonejs.com" target="_blank">KeystoneJS</a>.
+		
+		footer.footer
+			.container
+				p Powered by <a href="https://keystonejs.com" target="_blank">KeystoneJS</a>.
 
 
 		//- JAVASCRIPT
@@ -108,3 +128,4 @@ html
 
 		//- Include template-specific javascript files by extending the js block
 		block js
+			script(src='/js/site/offcanvas.js')

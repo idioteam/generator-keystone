@@ -8,7 +8,7 @@
  * modules in your project's /lib directory.
  */
 <% } %>var _ = require('lodash');
-
+const pug_utils = require('./middlewares/pug');
 
 /**
 	Initialises the standard view locals<% if (includeGuideComments) { %>
@@ -25,6 +25,13 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Contact', key: 'contact', href: '/contact' }<% } %>,
 	];
 	res.locals.user = req.user;
+
+	//	Rendo disponibile ai template la variabile env
+	res.locals.env = keystone.get('env');
+
+	//	Importo utility di pug
+	res.locals.pug_utils = pug_utils;
+
 	next();
 };
 

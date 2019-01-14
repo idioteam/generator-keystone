@@ -1,0 +1,22 @@
+//- immagine responsiva utilizzando la libreria lazyload
+//- uso
+	+lazy-img('a.png')(alt='test')
+	+lazy-img('b.png', false)(width='100px')
+	+lazy-img('c.png', true)(class='red' height='100px')
+//- risultati
+	<img class="lazy" alt="test" data-src="a.png" />
+	<img width="100px" src="b.png" />
+	<img class="red lazy" height="100px" data-src="c.png" />
+//-
+//- per rendere lazy una immagine di sfondo, utilizzare la funzione lazy_bg inclusa in locals utilizzando &attributes
+//-	esempio:
+//- .box-noleggi(style="background-size: cover;")&attributes(lazybg(pagina[0].galleria[i].src({secure:true, fetch_format:'jpg'})))
+mixin lazy_img (src, is_lazy = true)
+	-
+		if (is_lazy) {
+			attributes.class = (attributes.class ? attributes.class + ' ' : '') +  'lazy';
+			attributes["data-src"] = src;
+		} else {
+			attributes.src = src;
+		}
+	img&attributes(attributes)

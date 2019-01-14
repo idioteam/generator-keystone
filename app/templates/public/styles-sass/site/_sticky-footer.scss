@@ -1,0 +1,23 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html, body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  padding-top: $header_height; // 56px;
+  /* Margin bottom by footer height */
+  margin-bottom: $footer_height;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer_height;
+  line-height: $footer_height; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
