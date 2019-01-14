@@ -2,5 +2,5 @@
 
 $font-size-base: 14px;
 
-$header_height: 2 * $navbar-padding-y + 2 * $nav-link-padding-y + $line-height-base * $font-size-base; //56px // 40 + 8 + 8
+$header_height: 56px; //2 * $navbar-padding-y + 2 * $nav-link-padding-y + $line-height-base * $font-size-base;
 $footer_height: $header_height + 4; // 60px

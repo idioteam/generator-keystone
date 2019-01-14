@@ -8,6 +8,7 @@
  * modules in your project's /lib directory.
  */
 <% } %>var _ = require('lodash');
+var keystone = require('keystone');
 const pug_utils = require('./middlewares/pug');
 
 /**

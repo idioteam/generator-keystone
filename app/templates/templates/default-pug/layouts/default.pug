@@ -41,7 +41,8 @@ html(lang='it')
 
 		//- HEADER
 		header
-			nav.navbar.navbar-expand-md.fixed-top
+			//- rimuovere container per allineare navigazione a sx
+			nav.navbar.navbar-expand-md.fixed-top(class='navbar-dark bg-dark'): .container
 				a.navbar-brand(href='#') <%= _projectName %>
 				button.navbar-toggler(type='button' data-toggle='offcanvas')
 					span.navbar-toggler-icon
@@ -53,7 +54,7 @@ html(lang='it')
 								if section === link.key
 									span.sr-only (current)
 									
-		#header: .container
+		//-#header: .container
 
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
@@ -98,14 +99,14 @@ html(lang='it')
 
 
 		//- FOOTER
-		.container: #footer
+		//-.container: #footer
 
 			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
 			p Powered by <a href="https://keystonejs.com" target="_blank">KeystoneJS</a>.
 		
 		footer.footer
 			.container
-				p Powered by <a href="https://keystonejs.com" target="_blank">KeystoneJS</a>.
+				div Powered by <a href="https://keystonejs.com" target="_blank">KeystoneJS</a>.
 
 
 		//- JAVASCRIPT
