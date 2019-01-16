@@ -16,7 +16,8 @@ var KeystoneGenerator = module.exports = function KeystoneGenerator (args, optio
 
 	// Initialise default values
 	this.cloudinaryURL = false;
-	this.mailgunConfigured = false;
+	//	Settato a true
+	this.mailgunConfigured = true;
 	this.mailgunAPI = false;
 	this.mailgunDomain = false;
 
@@ -33,25 +34,27 @@ var KeystoneGenerator = module.exports = function KeystoneGenerator (args, optio
 		console.log(
 			'\n------------------------------------------------'
 			+ '\n'
-			+ '\nYour KeystoneJS project is ready to go!'
+			+ '\nConfigurazione completata!'
+/*
 			+ '\n'
 			+ '\nFor help getting started, visit https://keystonejs.com/getting-started/'
 
 			+ ((this.includeEmail && !this.mailgunConfigured)
-				? '\n'
-				+ '\nWe\'ve included the setup for email in your project. When you'
-				+ '\nwant to get this working, just create a mailgun account and put'
-				+ '\nyour mailgun details into the .env file.'
-				: '')
+			? '\n'
+			+ '\nWe\'ve included the setup for email in your project. When you'
+			+ '\nwant to get this working, just create a mailgun account and put'
+			+ '\nyour mailgun details into the .env file.'
+			: '')
 
 			+ ((this.usingDemoCloudinaryAccount)
-				? '\n'
-				+ '\nWe\'ve included a demo Cloudinary Account, which is reset daily.'
-				+ '\nPlease configure your own account or use the LocalImage field instead'
-				+ '\nbefore sending your site live.'
-				: '')
+			? '\n'
+			+ '\nWe\'ve included a demo Cloudinary Account, which is reset daily.'
+			+ '\nPlease configure your own account or use the LocalImage field instead'
+			+ '\nbefore sending your site live.'
+			: '')
+*/
+			+ '\n\nPer avviare il progetto, eseguire ' + cmd + '.'
 
-			+ '\n\nTo start your new website, run ' + cmd + '.'
 			+ '\n');
 
 	}, this);
@@ -108,7 +111,7 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 				name: 'projectName',
 				message: 'Qual\'è il nome del progetto?',
 				default: 'My Site',
-			}, {
+			}, /* {
 				name: 'viewEngine',
 				message: 'Quale template engine vuoi usare? Pug, Nunjucks, Twig or Handlebars ' + (('[pug | nunjucks | twig | hbs]').grey),
 				default: 'pug',
@@ -144,12 +147,12 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 				message: 'Inserisci una password per l\'utente Admin:'
 					+ '\n Please use a temporary password as it will be saved in plain text and change it after the first login.',
 				default: 'Idio123-',
-			}, {
+			}, */ {
 				type: 'confirm',
 				name: 'newDirectory',
 				message: 'Vuoi creare una nuova directory per il progetto?',
-				default: true,
-			}, {
+				default: false,
+			}, /* {
 				type: 'confirm',
 				name: 'includeEmail',
 				message: '------------------------------------------------'
@@ -157,7 +160,7 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 					+ '\n    We will set you up with an email template for enquiries as well'
 					+ '\n    as optional mailgun integration',
 				default: true,
-			},
+			}, */
 		],
 
 		config: [],
@@ -173,29 +176,40 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 		// ... then escape it for use in strings (most cases)
 		this.projectName = utils.escapeString(this.projectName);
 		// Escape other inputs
+		// Hardcoded!
+		this.adminLogin = 'idiotest@nsi.it';
 		this.adminLogin = utils.escapeString(this.adminLogin);
+		//	Hardcoded!
+		this.adminPassword = 'Idio123-';
 		this.adminPassword = utils.escapeString(this.adminPassword);
-
-		// Clean the viewEngine selection
-		if (_.includes(['handlebars', 'hbs', 'h'], this.viewEngine.toLowerCase().trim())) {
-			this.viewEngine = 'hbs';
-		} else if (_.includes(['twig', 't'], this.viewEngine.toLowerCase().trim())) {
-			this.viewEngine = 'twig';
-		} else if (_.includes(['nunjucks', 'nun', 'n'], this.viewEngine.toLowerCase().trim())) {
-			this.viewEngine = 'nunjucks';
-		} else {
-			this.viewEngine = 'pug';
-		}
-
-		// Clean the preprocessor
-		if (_.includes(['sass', 'sa'], this.preprocessor.toLowerCase().trim())) {
-			this.preprocessor = 'sass';
-		} else if (_.includes(['less', 'le'], this.preprocessor.toLowerCase().trim())) {
-			this.preprocessor = 'less';
-		} else {
-			this.preprocessor = 'stylus';
-		}
-
+		/*
+                // Clean the viewEngine selection
+                if (_.includes(['handlebars', 'hbs', 'h'], this.viewEngine.toLowerCase().trim())) {
+                    this.viewEngine = 'hbs';
+                } else if (_.includes(['twig', 't'], this.viewEngine.toLowerCase().trim())) {
+                    this.viewEngine = 'twig';
+                } else if (_.includes(['nunjucks', 'nun', 'n'], this.viewEngine.toLowerCase().trim())) {
+                    this.viewEngine = 'nunjucks';
+                } else {
+                    this.viewEngine = 'pug';
+                }
+        */
+		//	Hardcoded!
+		this.viewEngine = 'pug';
+		/*
+                // Clean the preprocessor
+                if (_.includes(['sass', 'sa'], this.preprocessor.toLowerCase().trim())) {
+                    this.preprocessor = 'sass';
+                } else if (_.includes(['less', 'le'], this.preprocessor.toLowerCase().trim())) {
+                    this.preprocessor = 'less';
+                } else {
+                    this.preprocessor = 'stylus';
+                }
+        */
+		//	Hardcoded!
+		this.preprocessor = 'sass';
+		// Hardcoded!
+		this.userModel = 'User';
 		// Clean the userModel name
 		this.userModel = utils.camelcase(this.userModel, false);
 		this.userModelPath = utils.keyToPath(this.userModel, true);
@@ -205,51 +219,57 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 			this.destinationRoot(utils.slug(this.projectName));
 		}
 
+		//	Hardcoded!
+		this.includeBlog = false;
+		this.includeGallery = false;
+		this.includeEmail = false;
+		this.includeEnquiries = false;
+
 		// Additional prompts may be required, based on selections
-		if (this.includeBlog || this.includeGallery || this.includeEmail) {
+		// if (this.includeBlog || this.includeGallery || this.includeEmail) {
 
-			if (this.includeEmail) {
-				prompts.config.push({
-					name: 'mailgunAPI',
-					message: '------------------------------------------------'
-						+ '\n    If you want to set up mailgun now, you can provide'
-						+ '\n    your mailgun credentials, otherwise, you will'
-						+ '\n    want to add these to your .env later.'
-						+ '\n    mailgun API key:',
-				});
-				prompts.config.push({
-					name: 'mailgunDomain',
-					message: '------------------------------------------------'
-					+ '\n    mailgun domain:',
-				});
-			}
+			// if (this.includeEmail) {
+			// 	prompts.config.push({
+			// 		name: 'mailgunAPI',
+			// 		message: '------------------------------------------------'
+			// 			+ '\n    If you want to set up mailgun now, you can provide'
+			// 			+ '\n    your mailgun credentials, otherwise, you will'
+			// 			+ '\n    want to add these to your .env later.'
+			// 			+ '\n    mailgun API key:',
+			// 	});
+			// 	prompts.config.push({
+			// 		name: 'mailgunDomain',
+			// 		message: '------------------------------------------------'
+			// 			+ '\n    mailgun domain:',
+			// 	});
+			// }
 
-			if (this.includeBlog || this.includeGallery) {
+			// if (this.includeBlog || this.includeGallery) {
+			//
+			// 	var blog_gallery = 'blog and gallery templates';
+			//
+			// 	if (!this.includeBlog) {
+			// 		blog_gallery = 'gallery template';
+			// 	} else if (!this.includeGallery) {
+			// 		blog_gallery = 'blog template';
+			// 	}
+			//
+			// 	prompts.config.push({
+			// 		name: 'cloudinaryURL',
+			// 		message: '------------------------------------------------'
+			// 			+ '\n    KeystoneJS integrates with Cloudinary for image upload, resizing and'
+			// 			+ '\n    hosting. See https://keystonejs.com/api/field/cloudinaryimage for more info.'
+			// 			+ '\n    '
+			// 			+ '\n    CloudinaryImage fields are used by the ' + blog_gallery + '.'
+			// 			+ '\n    '
+			// 			+ '\n    You can skip this for now (we\'ll include demo account details)'
+			// 			+ '\n    '
+			// 			+ '\n    Please enter your Cloudinary URL:',
+			// 	});
+			//
+			// }
 
-				var blog_gallery = 'blog and gallery templates';
-
-				if (!this.includeBlog) {
-					blog_gallery = 'gallery template';
-				} else if (!this.includeGallery) {
-					blog_gallery = 'blog template';
-				}
-
-				prompts.config.push({
-					name: 'cloudinaryURL',
-					message: '------------------------------------------------'
-						+ '\n    KeystoneJS integrates with Cloudinary for image upload, resizing and'
-						+ '\n    hosting. See https://keystonejs.com/api/field/cloudinaryimage for more info.'
-						+ '\n    '
-						+ '\n    CloudinaryImage fields are used by the ' + blog_gallery + '.'
-						+ '\n    '
-						+ '\n    You can skip this for now (we\'ll include demo account details)'
-						+ '\n    '
-						+ '\n    Please enter your Cloudinary URL:',
-				});
-
-			}
-
-		}
+		// }
 
 		if (!prompts.config.length) {
 			return cb();
@@ -261,14 +281,17 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 				this[key] = val;
 			}, this);
 
-			if (this.includeEmail && (this.mailgunAPI && this.mailgunDomain)) {
-				this.mailgunConfigured = true;
-			}
+			// Hardcoded!
+			this.includeEmail = false;
 
-			if (!this.cloudinaryURL && (this.includeBlog || this.includeGallery)) {
-				this.usingDemoCloudinaryAccount = true;
-				this.cloudinaryURL = 'cloudinary://719553377588792:u3lHeoTDWp5xIsNU7W841_aTUV4@nsi-cdn';
-			}
+			// if (this.includeEmail && (this.mailgunAPI && this.mailgunDomain)) {
+			// 	this.mailgunConfigured = true;
+			// }
+
+			// if (!this.cloudinaryURL && (this.includeBlog || this.includeGallery)) {
+			// 	this.usingDemoCloudinaryAccount = true;
+			// 	this.cloudinaryURL = 'cloudinary://719553377588792:u3lHeoTDWp5xIsNU7W841_aTUV4@nsi-cdn';
+			// }
 
 			cb();
 
@@ -281,26 +304,28 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 KeystoneGenerator.prototype.guideComments = function () {
 
 	var cb = this.async();
-	if (this.auto) {
-		return cb();
-	}
+	// if (this.auto) {
+	// 	return cb();
+	// }
 
+	this.includeGuideComments = true;
+	return cb();
 
-	this.prompt([
-		{
-			type: 'confirm',
-			name: 'includeGuideComments',
-			message: '------------------------------------------------'
-				+ '\n    Finally, would you like to include extra code comments in'
-				+ '\n    your project? If you\'re new to Keystone, these may be helpful.',
-			default: true,
-		},
-	], function (props) {
-
-		this.includeGuideComments = props.includeGuideComments;
-		cb();
-
-	}.bind(this));
+	// this.prompt([
+	// 	{
+	// 		type: 'confirm',
+	// 		name: 'includeGuideComments',
+	// 		message: '------------------------------------------------'
+	// 			+ '\n    Finally, would you like to include extra code comments in'
+	// 			+ '\n    your project? If you\'re new to Keystone, these may be helpful.',
+	// 		default: true,
+	// 	},
+	// ], function (props) {
+	//
+	// 	this.includeGuideComments = props.includeGuideComments;
+	// 	cb();
+	//
+	// }.bind(this));
 
 };
 
@@ -329,18 +354,18 @@ KeystoneGenerator.prototype.models = function models () {
 
 	var modelFiles = [];
 
-	if (this.includeBlog) {
-		modelFiles.push('Post');
-		modelFiles.push('PostCategory');
-	}
+	// if (this.includeBlog) {
+	// 	modelFiles.push('Post');
+	// 	modelFiles.push('PostCategory');
+	// }
 
-	if (this.includeGallery) {
-		modelFiles.push('Gallery');
-	}
+	// if (this.includeGallery) {
+	// 	modelFiles.push('Gallery');
+	// }
 
-	if (this.includeEnquiries) {
-		modelFiles.push('Enquiry');
-	}
+	// if (this.includeEnquiries) {
+	// 	modelFiles.push('Enquiry');
+	// }
 
 	this.mkdir('models');
 
@@ -361,90 +386,90 @@ KeystoneGenerator.prototype.routes = function routes () {
 	this.template('routes/_index.js', 'routes/index.js');
 	this.template('routes/_middleware.js', 'routes/middleware.js');
 
-	if (this.includeEmail) {
-		this.template('routes/_emails.js', 'routes/emails.js');
-	}
+	// if (this.includeEmail) {
+	// 	this.template('routes/_emails.js', 'routes/emails.js');
+	// }
 
 	this.copy('routes/views/index.js');
 	this.copy('routes/middlewares/pug/index.js');
 	this.copy('routes/middlewares/pug/lazyload/index.js');
 
-	if (this.includeBlog) {
-		this.copy('routes/views/blog.js');
-		this.copy('routes/views/post.js');
-	}
+	// if (this.includeBlog) {
+	// 	this.copy('routes/views/blog.js');
+	// 	this.copy('routes/views/post.js');
+	// }
 
-	if (this.includeGallery) {
-		this.copy('routes/views/gallery.js');
-	}
+	// if (this.includeGallery) {
+	// 	this.copy('routes/views/gallery.js');
+	// }
 
-	if (this.includeEnquiries) {
-		this.copy('routes/views/contact.js');
-	}
+	// if (this.includeEnquiries) {
+	// 	this.copy('routes/views/contact.js');
+	// }
 
 };
 
 KeystoneGenerator.prototype.templates = function templates () {
 
-	if (this.viewEngine === 'hbs') {
+	// if (this.viewEngine === 'hbs') {
 
 		// Copy Handlebars Templates
 
-		this.mkdir('templates');
-		this.mkdir('templates/views');
+		// this.mkdir('templates');
+		// this.mkdir('templates/views');
+		//
+		// this.directory('templates/default-hbs/views/layouts', 'templates/views/layouts');
+		// this.directory('templates/default-hbs/views/helpers', 'templates/views/helpers');
+		// this.directory('templates/default-hbs/views/partials', 'templates/views/partials');
+		//
+		// this.template('templates/default-hbs/views/index.hbs', 'templates/views/index.hbs');
+		//
+		// if (this.includeBlog) {
+		// 	this.copy('templates/default-hbs/views/blog.hbs', 'templates/views/blog.hbs');
+		// 	this.copy('templates/default-hbs/views/post.hbs', 'templates/views/post.hbs');
+		// }
+		//
+		// if (this.includeGallery) {
+		// 	this.copy('templates/default-hbs/views/gallery.hbs', 'templates/views/gallery.hbs');
+		// }
+		//
+		// if (this.includeEnquiries) {
+		// 	this.copy('templates/default-hbs/views/contact.hbs', 'templates/views/contact.hbs');
+		// 	if (this.includeEmail) {
+		// 		this.copy('templates/default-hbs/emails/enquiry-notification.hbs', 'templates/emails/enquiry-notification.hbs');
+		// 	}
+		// }
 
-		this.directory('templates/default-hbs/views/layouts', 'templates/views/layouts');
-		this.directory('templates/default-hbs/views/helpers', 'templates/views/helpers');
-		this.directory('templates/default-hbs/views/partials', 'templates/views/partials');
-
-		this.template('templates/default-hbs/views/index.hbs', 'templates/views/index.hbs');
-
-		if (this.includeBlog) {
-			this.copy('templates/default-hbs/views/blog.hbs', 'templates/views/blog.hbs');
-			this.copy('templates/default-hbs/views/post.hbs', 'templates/views/post.hbs');
-		}
-
-		if (this.includeGallery) {
-			this.copy('templates/default-hbs/views/gallery.hbs', 'templates/views/gallery.hbs');
-		}
-
-		if (this.includeEnquiries) {
-			this.copy('templates/default-hbs/views/contact.hbs', 'templates/views/contact.hbs');
-			if (this.includeEmail) {
-				this.copy('templates/default-hbs/emails/enquiry-notification.hbs', 'templates/emails/enquiry-notification.hbs');
-			}
-		}
-
-	} else if (this.viewEngine === 'nunjucks') {
+	// } else if (this.viewEngine === 'nunjucks') {
 
 		// Copy Nunjucks Templates
 
-		this.mkdir('templates');
-		this.mkdir('templates/views');
+		// this.mkdir('templates');
+		// this.mkdir('templates/views');
+		//
+		// this.directory('templates/default-' + this.viewEngine + '/views/layouts', 'templates/views/layouts');
+		// this.directory('templates/default-' + this.viewEngine + '/views/mixins', 'templates/views/mixins');
+		// this.directory('templates/default-' + this.viewEngine + '/views/errors', 'templates/views/errors');
+		//
+		// this.template('templates/default-' + this.viewEngine + '/views/index.html', 'templates/views/index.html');
+		//
+		// if (this.includeBlog) {
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/blog.html', 'templates/views/blog.html');
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/post.html', 'templates/views/post.html');
+		// }
+		//
+		// if (this.includeGallery) {
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/gallery.html', 'templates/views/gallery.html');
+		// }
+		//
+		// if (this.includeEnquiries) {
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/contact.html', 'templates/views/contact.html');
+		// 	if (this.includeEmail) {
+		// 		this.directory('templates/default-' + this.viewEngine + '/emails', 'templates/emails');
+		// 	}
+		// }
 
-		this.directory('templates/default-' + this.viewEngine + '/views/layouts', 'templates/views/layouts');
-		this.directory('templates/default-' + this.viewEngine + '/views/mixins', 'templates/views/mixins');
-		this.directory('templates/default-' + this.viewEngine + '/views/errors', 'templates/views/errors');
-
-		this.template('templates/default-' + this.viewEngine + '/views/index.html', 'templates/views/index.html');
-
-		if (this.includeBlog) {
-			this.copy('templates/default-' + this.viewEngine + '/views/blog.html', 'templates/views/blog.html');
-			this.copy('templates/default-' + this.viewEngine + '/views/post.html', 'templates/views/post.html');
-		}
-
-		if (this.includeGallery) {
-			this.copy('templates/default-' + this.viewEngine + '/views/gallery.html', 'templates/views/gallery.html');
-		}
-
-		if (this.includeEnquiries) {
-			this.copy('templates/default-' + this.viewEngine + '/views/contact.html', 'templates/views/contact.html');
-			if (this.includeEmail) {
-				this.directory('templates/default-' + this.viewEngine + '/emails', 'templates/emails');
-			}
-		}
-
-	} else {
+	// } else {
 
 		// Copy Pug/Twig Templates
 
@@ -457,22 +482,22 @@ KeystoneGenerator.prototype.templates = function templates () {
 
 		this.template('templates/default-' + this.viewEngine + '/views/index.' + this.viewEngine, 'templates/views/index.' + this.viewEngine);
 
-		if (this.includeBlog) {
-			this.copy('templates/default-' + this.viewEngine + '/views/blog.' + this.viewEngine, 'templates/views/blog.' + this.viewEngine);
-			this.copy('templates/default-' + this.viewEngine + '/views/post.' + this.viewEngine, 'templates/views/post.' + this.viewEngine);
-		}
+		// if (this.includeBlog) {
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/blog.' + this.viewEngine, 'templates/views/blog.' + this.viewEngine);
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/post.' + this.viewEngine, 'templates/views/post.' + this.viewEngine);
+		// }
 
-		if (this.includeGallery) {
-			this.copy('templates/default-' + this.viewEngine + '/views/gallery.' + this.viewEngine, 'templates/views/gallery.' + this.viewEngine);
-		}
+		// if (this.includeGallery) {
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/gallery.' + this.viewEngine, 'templates/views/gallery.' + this.viewEngine);
+		// }
 
-		if (this.includeEnquiries) {
-			this.copy('templates/default-' + this.viewEngine + '/views/contact.' + this.viewEngine, 'templates/views/contact.' + this.viewEngine);
-			if (this.includeEmail) {
-				this.copy('templates/default-' + this.viewEngine + '/emails/enquiry-notification.' + this.viewEngine, 'templates/emails/enquiry-notification.' + this.viewEngine);
-			}
-		}
-	}
+		// if (this.includeEnquiries) {
+		// 	this.copy('templates/default-' + this.viewEngine + '/views/contact.' + this.viewEngine, 'templates/views/contact.' + this.viewEngine);
+		// 	// if (this.includeEmail) {
+		// 	// 	this.copy('templates/default-' + this.viewEngine + '/emails/enquiry-notification.' + this.viewEngine, 'templates/emails/enquiry-notification.' + this.viewEngine);
+		// 	// }
+		// }
+	// }
 
 };
 
