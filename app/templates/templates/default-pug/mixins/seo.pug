@@ -1,0 +1,55 @@
+mixin seo ()
+    if seo
+        if seo.meta.description
+            +meta_description()
+        if seo.stato.locale
+            +has_locale()
+        if seo.stato.pagination
+            +has_pagination()
+        if seo.open_graph
+            +open_graph()
+        if seo.twitter_card
+            +twitter_card()
+        if seo.schema
+            +schema_org()
+        if seo.canonical
+            +canonical()
+        if seo.prefetch
+            +prefetch()
+
+mixin meta_description ()
+    meta(content=seo.meta.description name="description")
+
+mixin has_locale ()
+    each hreflang in seo.hreflang
+        link(href=hreflang.href hreflang=hreflang.locale rel="alternate")
+
+mixin has_pagination ()
+    if seo.pagination.next
+        link(rel="next" href=seo.pagination.next)
+    if seo.pagination.prev
+        link(rel="prev" href=seo.pagination.prev)
+
+mixin open_graph ()
+    +meta_prop(seo.open_graph, 'og')
+
+mixin twitter_card ()
+    +meta_prop(seo.twitter_card, 'twitter')
+
+mixin schema_org ()
+    each schema_type in seo.schema
+        script(type='application/ld+json')
+            | !{JSON.stringify(schema_type)}
+
+//- Crea meta proprietà ciclando un oggetto ed assegnando un prefisso se definito
+mixin meta_prop (proprieta, prefisso)
+    each value, key in proprieta
+        if value
+            meta(name=(prefisso ? prefisso + ':' : '') + key content=value)
+
+mixin canonical ()
+    link(rel="canonical" href=seo.canonical)
+
+mixin prefetch ()
+    each value in seo.prefetch
+        link(rel='dns-prefetch' href=value)
