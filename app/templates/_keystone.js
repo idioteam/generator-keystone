@@ -3,16 +3,12 @@
 require('dotenv').config();
 
 // Require keystone
-var keystone = require('keystone');<% if (viewEngine == 'hbs') { %>
-var handlebars = require('express-handlebars');<% } else if (viewEngine == 'nunjucks') { %>
-var cons = require('consolidate');
-var nunjucks = require('nunjucks');<% } else if (viewEngine == 'twig') { %>
-var Twig = require('twig');<% } %>
-<% if (includeGuideComments) { %>
-// Initialise Keystone with your project's configuration.
-// See https://keystonejs.com/documentation/configuration/ for available options
-// and documentation.
-<% } %>
+var keystone = require('keystone');
+const keystoned = require('keystoned');
+keystoned.init({
+	config: process.env.NODE_ENV
+});
+
 keystone.init({
 	'name': '<%= projectName %>',
 	'brand': '<%= projectName %>',
