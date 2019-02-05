@@ -19,6 +19,7 @@ const pug_utils = require('./middlewares/pug');
 	or replace it with your own templates / logic.<% } %>
 */
 exports.initLocals = function (req, res, next) {
+
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' }<% if (includeBlog) { %>,
 		{ label: 'Blog', key: 'blog', href: '/blog' }<% } %><% if (includeGallery) { %>,
@@ -29,6 +30,10 @@ exports.initLocals = function (req, res, next) {
 
 	//	Rendo disponibile ai template la variabile env
 	res.locals.env = keystone.get('env');
+	//	il path della pagina
+	res.locals.path = req.path;
+	//	le impostazioni del progetto
+	res.locals.impostazioni = keystone.get('impostazioni');
 
 	//	Importo utility di pug
 	res.locals.pug_utils = pug_utils;

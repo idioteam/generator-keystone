@@ -394,6 +394,13 @@ KeystoneGenerator.prototype.routes = function routes () {
 	this.copy('routes/middlewares/pug/index.js');
 	this.copy('routes/middlewares/pug/lazyload/index.js');
 
+	//	Cartelle aggiuntive
+	this.mkdir('cert');
+	this.directory('cert');
+
+	this.mkdir('config');
+	this.directory('config');
+
 	// if (this.includeBlog) {
 	// 	this.copy('routes/views/blog.js');
 	// 	this.copy('routes/views/post.js');
