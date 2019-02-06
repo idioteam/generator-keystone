@@ -9,6 +9,7 @@ const keystoned = require('keystoned');
 keystoned.init({
 	config: process.env.NODE_ENV,
 	minify_js: true,
+	model_queries: true,
 	sitemap: true,
 });
 

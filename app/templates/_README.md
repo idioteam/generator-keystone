@@ -18,7 +18,8 @@ Questo generatore installa il modulo Keystoned che integra alcune utilità che v
 - config utilizza file di configurazione in base al valore della variabile NODE_ENV
 - minify-js: consente di minificare i file js in produzione
 - sitemap: genera la sitemap del sito
-- ne verranno altri come seo, i18n, chache query, generazione css
+- model_query: consente di creare una cache per le query statiche di frequente utilizzo
+- ne verranno altri come seo, i18n, generazione css
  
 # Fork del generatore
 Il generatore aggiunge un po' di materiale tipo.
