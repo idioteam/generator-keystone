@@ -348,9 +348,14 @@ KeystoneGenerator.prototype.project = function project () {
 	this.copy('gitignore', '.gitignore');
 	this.copy('Procfile');
 
+	//	Configurazione
 	this.template('config/_developement.js', 'config/developement.js');
 	this.template('config/_production.js', 'config/production.js');
 	this.template('config/_staging.js', 'config/staging.js');
+
+	//	Certificati
+	this.mkdir('cert');
+	this.directory('cert');
 
 };
 
@@ -396,13 +401,6 @@ KeystoneGenerator.prototype.routes = function routes () {
 
 	this.copy('routes/views/index.js');
 	this.directory('routes/middlewares');
-
-	//	Cartelle aggiuntive
-	this.mkdir('cert');
-	this.directory('cert');
-
-	this.mkdir('config');
-	this.directory('config');
 
 	// if (this.includeBlog) {
 	// 	this.copy('routes/views/blog.js');
