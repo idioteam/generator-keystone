@@ -1,3 +1,4 @@
 COOKIE_SECRET=<%= cookieSecret %>
 CLOUDINARY_URL=cloudinary://719553377588792:u3lHeoTDWp5xIsNU7W841_aTUV4@nsi-cdn
 MANDRILL_API_KEY=tqcMkg939Aqp1xMvc1UAkg
+## NODE_ENV=production

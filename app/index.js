@@ -357,24 +357,14 @@ KeystoneGenerator.prototype.project = function project () {
 	this.mkdir('cert');
 	this.directory('cert');
 
+	// Readme
+	this.copy('_README.md', 'README.md');
+
 };
 
 KeystoneGenerator.prototype.models = function models () {
 
-	var modelFiles = [];
-
-	// if (this.includeBlog) {
-	// 	modelFiles.push('Post');
-	// 	modelFiles.push('PostCategory');
-	// }
-
-	// if (this.includeGallery) {
-	// 	modelFiles.push('Gallery');
-	// }
-
-	// if (this.includeEnquiries) {
-	// 	modelFiles.push('Enquiry');
-	// }
+	var modelFiles = ['Impostazioni'];
 
 	this.mkdir('models');
 

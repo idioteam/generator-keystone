@@ -1,4 +1,4 @@
-<% if (includeGuideComments) { %>/**
+/**
  * This file is where you define your application routes and controllers.
  *
  * Start by including the middleware you want to run for every request;
@@ -18,13 +18,13 @@
  * http://expressjs.com/api.html#app.VERB
  */
 
-<% } %>var keystone = require('keystone');
+var keystone = require('keystone');
 var middleware = require('./middleware');
+var express_middlewares = require('./middlewares/express');
 var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
-keystone.pre('routes', require('./middlewares/error_handlers'));
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
@@ -36,18 +36,12 @@ var routes = {
 exports = module.exports = function (app) {
 
 	//	Rimozione trailing slashes con redirect 301
-	app.get('\\S+\/$', function (req, res) {
-		return res.redirect(301, req.path.slice(0, -1) + req.url.slice(req.path.length));
-	});
+	app.use(express_middlewares.remove_trailing_slash);
 	
 	// Views
 	app.get('/', routes.views.index);
-<% if (includeBlog) { %>	app.get('/blog/:category?', routes.views.blog);
-	app.get('/blog/post/:post', routes.views.post);
-<% } %><% if (includeGallery) { %>	app.get('/gallery', routes.views.gallery);
-<% } %><% if (includeEnquiries) { %>	app.all('/contact', routes.views.contact);
-<% } %><% if (includeGuideComments) { %>
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
-<% } %>
+
 };

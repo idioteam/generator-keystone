@@ -1,4 +1,4 @@
-<% if (includeGuideComments) { %>/**
+/**
  * This file contains the common middleware used by your routes.
  *
  * Extend or replace these functions as your application requires.
@@ -7,7 +7,7 @@
  * you have more middleware you may want to group it as separate
  * modules in your project's /lib directory.
  */
-<% } %>var _ = require('lodash');
+var _ = require('lodash');
 var keystone = require('keystone');
 const pug_utils = require('./middlewares/pug');
 
@@ -21,10 +21,7 @@ const pug_utils = require('./middlewares/pug');
 exports.initLocals = function (req, res, next) {
 
 	res.locals.navLinks = [
-		{ label: 'Home', key: 'home', href: '/' }<% if (includeBlog) { %>,
-		{ label: 'Blog', key: 'blog', href: '/blog' }<% } %><% if (includeGallery) { %>,
-		{ label: 'Gallery', key: 'gallery', href: '/gallery' }<% } %><% if (includeEnquiries) { %>,
-		{ label: 'Contact', key: 'contact', href: '/contact' }<% } %>,
+		{ label: 'Home', key: 'home', href: '/' }
 	];
 	res.locals.user = req.user;
 
@@ -37,7 +34,22 @@ exports.initLocals = function (req, res, next) {
 
 	//	Importo utility di pug
 	res.locals.pug_utils = pug_utils;
+	
+	//	Metodi per la gestione di errori 404 e 500
+	res.not_found = function (title, message) {
+		res.status(404).render('errors/404', {
+			title: title,
+			message: message,
+		});
+	};
 
+	res.server_error = function (title, message) {
+		res.status(500).render('errors/500', {
+			title: title,
+			message: message,
+		});
+	};
+	
 	next();
 };
 

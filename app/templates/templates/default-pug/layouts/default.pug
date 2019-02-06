@@ -122,11 +122,18 @@ html(lang='it')
 
 		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
 		//- which generate links to edit content for users who can access Keystone
-		if user && user.canAccessKeystone
+		//- if user && user.canAccessKeystone
 			script(src='/keystone/js/content/editor.js')
 
 		//- Add scripts that are globally required by your site here.
-
+		//-idiojs:dev
+		if env != 'production'
+			script(src='/js/site/offcanvas.js')
+		//-idiojs:end
+		//-idiojs:prod
+		if env == 'production'
+			script(src='/js/prod.min.js')
+		//-idiojs:end
 		//- Include template-specific javascript files by extending the js block
 		block js
 			script(src='/js/site/offcanvas.js')
