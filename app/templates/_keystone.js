@@ -7,7 +7,9 @@ var keystone = require('keystone');
 
 const keystoned = require('keystoned');
 keystoned.init({
-	config: process.env.NODE_ENV
+	config: process.env.NODE_ENV,
+	minify_js: true,
+	sitemap: true,
 });
 
 keystone.init({
