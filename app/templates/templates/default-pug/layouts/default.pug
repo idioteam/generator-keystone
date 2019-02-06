@@ -1,4 +1,5 @@
 include ../mixins/flash-messages
+include ../mixins/seo
 
 doctype html
 html(lang='it')
@@ -35,6 +36,7 @@ html(lang='it')
 
 		//- Add any other template-specific HEAD tags by extending the head block
 		block head
+			+seo()
 
 	//- HTML BODY
 	body
