@@ -348,6 +348,10 @@ KeystoneGenerator.prototype.project = function project () {
 	this.copy('gitignore', '.gitignore');
 	this.copy('Procfile');
 
+	this.template('config/_developement.js', 'config/developement.js');
+	this.template('config/_production.js', 'config/production.js');
+	this.template('config/_staging.js', 'config/staging.js');
+
 };
 
 KeystoneGenerator.prototype.models = function models () {
@@ -391,8 +395,7 @@ KeystoneGenerator.prototype.routes = function routes () {
 	// }
 
 	this.copy('routes/views/index.js');
-	this.copy('routes/middlewares/pug/index.js');
-	this.copy('routes/middlewares/pug/lazyload/index.js');
+	this.directory('routes/middlewares');
 
 	//	Cartelle aggiuntive
 	this.mkdir('cert');
@@ -520,14 +523,14 @@ KeystoneGenerator.prototype.files = function files () {
 	this.directory('public/js');
 	this.copy('public/favicon.ico');
 
-	if (this.preprocessor === 'sass') {
+	// if (this.preprocessor === 'sass') {
 		this.directory('public/fonts', 'public/fonts/bootstrap');
 		this.directory('public/styles-sass', 'public/styles');
-	} else if (this.preprocessor === 'less') {
-		this.directory('public/fonts');
-		this.directory('public/styles-less', 'public/styles');
-	} else {
-		this.directory('public/fonts');
-		this.directory('public/styles-stylus', 'public/styles');
-	}
+	// } else if (this.preprocessor === 'less') {
+	// 	this.directory('public/fonts');
+	// 	this.directory('public/styles-less', 'public/styles');
+	// } else {
+	// 	this.directory('public/fonts');
+	// 	this.directory('public/styles-stylus', 'public/styles');
+	// }
 };

@@ -4,6 +4,7 @@ require('dotenv').config();
 
 // Require keystone
 var keystone = require('keystone');
+
 const keystoned = require('keystoned');
 keystoned.init({
 	config: process.env.NODE_ENV
@@ -12,35 +13,13 @@ keystoned.init({
 keystone.init({
 	'name': '<%= projectName %>',
 	'brand': '<%= projectName %>',
-<% if (preprocessor === 'sass') { %>
 	'sass': 'public',
-<% } else if (preprocessor === 'less') { %>
-	'less': 'public',
-<% } else { %>
-	'stylus': 'public',
-<% } %>	'static': 'public',
+	'static': 'public',
 	'favicon': 'public/favicon.ico',
-	'views': 'templates/views',<% if (viewEngine === 'nunjucks') { %>
-	'view engine': '.html',
-	'custom engine': cons.nunjucks,
-<% } else if (viewEngine === 'hbs') { %>
-	'view engine': '.hbs',
-<% } else { %>
+	'views': 'templates/views',
 	'view engine': '<%= viewEngine %>',
-<% } %><% if (viewEngine === 'hbs') { %>
-	'custom engine': handlebars.create({
-		layoutsDir: 'templates/views/layouts',
-		partialsDir: 'templates/views/partials',
-		defaultLayout: 'default',
-		helpers: new require('./templates/views/helpers')(),
-		extname: '.hbs',
-	}).engine,
-<% } else if (viewEngine == 'twig') { %>
-	'twig options': { method: 'fs' },
-	'custom engine': Twig.render,
-<% } %><% if (includeEmail) { %>
+
 	'emails': 'templates/emails',
-<% } %>
 	'auto update': true,
 	'session': true,
 	'auth': true,

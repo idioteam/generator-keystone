@@ -10,7 +10,7 @@
  */
 module.exports = {
 	db: {
-		name: '',
+		name: '<%= projectName %>',
 		port: 27017,
 		host: 'idiocloud',
 	},
