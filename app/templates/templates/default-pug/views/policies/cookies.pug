@@ -1,0 +1,19 @@
+extends ../../layouts/default
+include ../../mixins/policies/cookies
+
+block css
+	link(href="/styles/policies/cookies.css", rel="stylesheet")
+block content
+	.container#cc-informativa
+		h1 Cookie policy
+			if cookies.ultimoAggiornamento
+				br
+				small ultimo aggiornamento: #{cookies.ultimoAggiornamento}
+		each par in cookies.pars
+			h2 #{par.titolo}
+			div.cc-paragrafo !{par.testo}
+		h2 Il report che segue mostra i cookie utilizzati
+		div.lista-cookies
+			each tipo in cookies.list
+				if tipo.pp.length > 0 || tipo.tp.length > 0
+					+elencoCookie(tipo)

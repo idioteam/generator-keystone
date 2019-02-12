@@ -30,6 +30,7 @@ keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers
 const routes = {
+	policies: importRoutes('./policies'),
 	views: importRoutes('./views'),
 };
 
@@ -41,9 +42,13 @@ exports = module.exports = function (app) {
 	
 	// Views
 	app.get('/', routes.views.index);
-
+	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
+
+	//	Policies
+	app.get('/policies/cookies', routes.policies.cookies);
+	app.get('/policies/:id', routes.policies.privacy);
 	
 	// Sitemap
 	app.get('/sitemap.xml', function (req, res) {

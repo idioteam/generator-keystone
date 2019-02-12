@@ -1,0 +1,54 @@
+mixin elencoCookie(tipo)
+	h2.cookie-group(id=tipo.codice)!= tipo.nome
+	br
+	small!= tipo.descrizione
+
+	if tipo.pp.length > 0
+		h3.text-uppercase(id=tipo.codice + '-pp') Prima parte
+		+cookie_table(tipo, tipo.codice, true)
+
+	if tipo.tp.length > 0
+		h3.text-uppercase(id=tipo.codice + '-tp') Terza parte
+		+cookie_table(tipo, tipo.codice, false)
+
+mixin cookie_table (tipo, key, prima_parte)
+	-
+		//-	Definizione classi colonne
+		var classi = {
+			nome: 'col-md-6',
+			durata: 'col-md-6',
+			dominio: null,
+			consenso: null,
+			descrizione: 'col-md-12'
+		}
+
+		if (tipo.codice === 'AN' || tipo.codice === 'PR') {
+			classi.durata = 'col-md-2'
+			classi.dominio = 'col-md-2';
+			classi.consenso = 'col-md-2';
+		}
+
+	div.table.row(id=key + (prima_parte ? '-pp' : '-tp') + '-lista')
+		//- Intestazioni
+		+cookie-header('Nome', classi.nome)
+		+cookie-header('Durata', classi.durata)
+		if tipo.codice === 'AN' || tipo.codice === 'PR'
+			+cookie-header('Dominio', classi.dominio)
+			+cookie-header('Consenso', classi.consenso, { class: 'cc-consenso' })
+		//- Celle
+		each cookie in tipo[prima_parte ? 'pp' : 'tp']
+			+cookie-cell(cookie.name, classi.nome)
+			+cookie-cell((cookie.durata.um === 'sessione' ? 'Sessione' : cookie.durata.qta + ' ' + cookie.durata.um), classi.durata)
+			if tipo.codice === 'AN' || tipo.codice === 'PR'
+				+cookie-cell(cookie.domain, classi.dominio)
+				+cookie-cell(null, classi.consenso, { class: 'cc-consenso' })
+					a(target="_blank")&attributes({ href: (cookie.terzaParte ? cookie.linkDisattivazione : '/opt-out/?id=' + cookie.name) }) Link
+			+cookie-cell(cookie.descrizione, classi.descrizione, { class: 'cc-descrizione' })
+//-	Th
+mixin cookie-header (testo, classe, options)
+	.th(class=classe)&attributes(options) #{testo}
+		block
+//-	Td
+mixin cookie-cell (testo, classe, options)
+	.td(class=classe)&attributes(options) #{testo}
+		block

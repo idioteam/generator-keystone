@@ -364,7 +364,11 @@ KeystoneGenerator.prototype.project = function project () {
 
 KeystoneGenerator.prototype.models = function models () {
 
-	var modelFiles = ['Impostazioni'];
+	var modelFiles = [
+		'Impostazioni',
+		'Cookies/Cookies-banner', 'Cookies/Cookies-contents', 'Cookies/Cookies-list',
+		'Privacy/Privacy-content', 'Privacy/Privacy-policies',
+	];
 
 	this.mkdir('models');
 

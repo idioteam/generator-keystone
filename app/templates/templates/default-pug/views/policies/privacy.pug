@@ -1,0 +1,12 @@
+extends ../../layouts/default
+include  ../../mixins/policies/privacy
+block css
+	link(href="/styles/policies/privacy.css", rel="stylesheet")
+
+block content
+	.container
+		#privacy-policy
+			each d, i in paragrafi
+				+paragrafo(paragrafi[i], i)
+				if i === 0 && paragrafi.length > 2
+					+sommario(paragrafi)

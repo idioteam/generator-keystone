@@ -50,17 +50,31 @@ keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-	<% if (includeBlog) { %>posts: ['posts', 'post-categories'],
-	<% } if (includeGallery) { %>galleries: 'galleries',
-	<% } if (includeEnquiries) { %>enquiries: 'enquiries',
-	<% } if (userModelPath.includes('-')) { %>'<%= userModelPath %>'<% } else { %><%= userModelPath %><% } %>: '<%= userModelPath %>',
+	'cookie policy': ['CookiesContents', 'CookiesList', 'CookiesBanner'],
+	'privacy policy': ['PrivacyPolicies', 'PrivacyContents'],
+	'altre impostazioni': [Impostazioni, 'users']
 });
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({
 	onMount: function () {
+		
 		if (keystone.get('env') === 'production' && keystoned.minify_js) {
 			keystoned.minify_js.minify();
 		}
-	}
+		
+		if (keystoned && keystoned.cookies) {
+			keystoned.cookies.banner.genera();
+		}
+		
+	},
+	onHttpServerCreated: function () {
+		//
+	},
+	onHttpsServerCreated: function () {
+		//
+	},
+	onStart: function () {
+		//
+	},
 });
