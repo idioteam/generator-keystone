@@ -52,7 +52,7 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	'cookie policy': ['CookiesContents', 'CookiesList', 'CookiesBanner'],
 	'privacy policy': ['PrivacyPolicies', 'PrivacyContents'],
-	'altre impostazioni': [Impostazioni, 'users']
+	'altre impostazioni': ['Impostazioni', 'users']
 });
 
 // Start Keystone to connect to your database and initialise the web server

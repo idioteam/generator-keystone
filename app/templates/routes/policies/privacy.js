@@ -24,7 +24,7 @@ exports = module.exports = function (req, res) {
 							return res.not_found();
 						}
 
-						locals.paragrafi = paragrafi.map(p => dati_inserisci(p, res.locals.it_globals));
+						locals.paragrafi = paragrafi.map(p => dati_inserisci(p, res.locals.impostazioni));
 						next();
 					});
 

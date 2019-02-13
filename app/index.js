@@ -365,7 +365,7 @@ KeystoneGenerator.prototype.project = function project () {
 KeystoneGenerator.prototype.models = function models () {
 
 	var modelFiles = [
-		'Impostazioni',
+		'Impostazioni/Impostazioni',
 		'Cookies/Cookies-banner', 'Cookies/Cookies-contents', 'Cookies/Cookies-list',
 		'Privacy/Privacy-content', 'Privacy/Privacy-policies',
 	];
@@ -395,6 +395,7 @@ KeystoneGenerator.prototype.routes = function routes () {
 
 	this.copy('routes/views/index.js');
 	this.directory('routes/middlewares');
+	this.directory('routes/policies');
 
 	// if (this.includeBlog) {
 	// 	this.copy('routes/views/blog.js');
@@ -481,6 +482,7 @@ KeystoneGenerator.prototype.templates = function templates () {
 		this.directory('templates/default-' + this.viewEngine + '/layouts', 'templates/layouts');
 		this.directory('templates/default-' + this.viewEngine + '/mixins', 'templates/mixins');
 		this.directory('templates/default-' + this.viewEngine + '/views/errors', 'templates/views/errors');
+		this.directory('templates/default-' + this.viewEngine + '/views/policies', 'templates/views/policies');
 
 		this.template('templates/default-' + this.viewEngine + '/views/index.' + this.viewEngine, 'templates/views/index.' + this.viewEngine);
 

@@ -105,8 +105,9 @@ function _autocompleta_loghi (settings) {
 
 		// logo da inserire nell'interfaccia di login
 		settings.logo.signin = settings.logo.signin || settings.logo.sito;
-		keystone.set('signin logo', [settings.logo.signin, 238]);
-
+		if (settings.logo.signin) {
+			keystone.set('signin logo', [settings.logo.signin, 238]);
+		}
 		// logo da includere nelle mail
 		settings.logo.email = settings.logo.email || settings.logo.sito;
 

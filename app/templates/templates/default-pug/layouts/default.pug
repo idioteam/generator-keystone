@@ -136,6 +136,7 @@ html(lang='it')
 		if env == 'production'
 			script(src='/js/prod.min.js')
 		//-idiojs:end
-		script(src='/js/policies/banner.min.js')
+		if cookies.numero
+			script(src='/js/policies/banner.min.js')
 		//- Include template-specific javascript files by extending the js block
 		block js

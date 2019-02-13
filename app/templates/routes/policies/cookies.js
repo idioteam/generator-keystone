@@ -19,7 +19,7 @@ exports = module.exports = function (req, res) {
 					console.error('Errore get lista cookies: ', err);
 					next(err);
 				}
-
+				locals.cookies.numero = result.length;
 				result.forEach(c => { locals.cookies.list[c._id][c.cookies.tp ? 'tp' : 'pp'] = c.cookies.lista });
 				next();
 			});
@@ -40,7 +40,7 @@ exports = module.exports = function (req, res) {
 
 		keystone.list('CookiesContents').model.find({ stato: 'Attivo' }).sort({ sortOrder: 1 })
 			.exec(function (err, result) {
-				locals.cookies.pars = result;
+				locals.cookies.pars = result.map(r => dati_inserisci(r, res.locals.impostazioni));
 				next(err);
 			});
 
@@ -85,6 +85,7 @@ function get_empty_cookie_object () {
 		},
 		ultimoAggiornamento: '',
 		pars: [],
+		numero: 0,
 	};
 }
 
@@ -109,4 +110,36 @@ const aggregation_query = [
 		},
 	},
 	{ $unwind: '$cookies' },
-]
+];
+
+function dati_inserisci (s, dati) {
+
+	s.titolo = dati_replace(s.titolo, dati);
+	s.testo = dati_replace(s.testo, dati);
+
+	return s;
+
+	function dati_replace (s, dati) {
+		const regex = /\[(.+?)\]/g;
+		let placeholders;
+
+		while ((placeholders = regex.exec(s))) {
+			s = s.replace(placeholders[0], dati_get_value(placeholders[1], dati));
+		}
+
+		return s;
+	}
+
+	function dati_get_value (placeholder, dati) {
+
+		const p = placeholder.split('.').reduce((acc, p) => {
+			if (acc[p]) {
+				return acc[p] || dati;
+			} else {
+				return acc;
+			}
+		}, Object.assign({}, dati));
+
+		return (typeof p === 'object' || !p) ? '' : p;
+	}
+}

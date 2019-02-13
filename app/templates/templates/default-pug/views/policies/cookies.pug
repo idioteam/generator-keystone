@@ -12,8 +12,11 @@ block content
 		each par in cookies.pars
 			h2 #{par.titolo}
 			div.cc-paragrafo !{par.testo}
-		h2 Il report che segue mostra i cookie utilizzati
-		div.lista-cookies
-			each tipo in cookies.list
-				if tipo.pp.length > 0 || tipo.tp.length > 0
-					+elencoCookie(tipo)
+		if cookies.numero
+			h2 Il report che segue mostra i cookie utilizzati
+			div.lista-cookies
+				each tipo in cookies.list
+					if tipo.pp.length > 0 || tipo.tp.length > 0
+						+elencoCookie(tipo)
+		else
+			div Questo sito non utilizza cookies.
