@@ -6,12 +6,19 @@ mixin paragrafo(par, indice)
 			h2.privacy-policy__titolo.privacy-policy__titolo--sticky #{par.titolo}
 			span.ancora(id=par.titolo.toLowerCase().replace(/ /g, '-'))
 		div.privacy-policy__paragrafo(class = indice !== 0 ? 'privacy-policy__paragrafo--sticky' : '') !{par.testo}
+			block
 
-mixin sommario (paragrafi)
+mixin sommario (paragrafi, aggiuntivi)
 	div.privacy-policy__container.privacy-policy__container--sticky
 		h2.privacy-policy__titolo.privacy-policy__titolo--sticky Sommario
 		div.privacy-policy__paragrafo.privacy-policy__paragrafo--sticky
 			ul
 				each paragrafo, i in paragrafi
 					if i !== 0
-						li: a(href='#' + paragrafo.titolo.toLowerCase().replace(/ /g, '-')) #{paragrafo.titolo}
+						+sommario_voce(paragrafo)
+				if aggiuntivi
+					each paragrafo in aggiuntivi
+						+sommario_voce(paragrafo)
+mixin sommario_voce (paragrafo)
+	li
+		a(href='#' + paragrafo.titolo.toLowerCase().replace(/ /g, '-')) #{paragrafo.titolo}

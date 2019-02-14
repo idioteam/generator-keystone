@@ -45,5 +45,6 @@ exports.create = {
         { chiave: 'policies.titolare.indirizzo',  	valore: '', info: 'Indirizzo del titolare del trattamento dei dati della privacy' },
         { chiave: 'policies.titolare.telefono',  	valore: '', info: 'Telefono del titolare del trattamento dei dati della privacy' },
         { chiave: 'policies.titolare.email',  		valore: '', info: 'Email del titolare del trattamento dei dati della privacy' },
+        { chiave: 'policies.dpo.email',  			valore: '', info: 'Email del RPD-DPO' },
 	]
 };

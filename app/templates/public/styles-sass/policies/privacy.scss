@@ -1,7 +1,7 @@
 $top-space: 56px;
 $break-point: "(max-width: 799px)";
 
-#privacy-policy {
+.privacy-policy {
   // padding:$top-space 0;
   
   a {
@@ -12,6 +12,10 @@ $break-point: "(max-width: 799px)";
   
   ul {
 	padding-left: 1em;
+  }
+  
+  li{
+	margin-bottom:0.5em;
   }
   
   .ancora {
