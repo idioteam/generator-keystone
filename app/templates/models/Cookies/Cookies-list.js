@@ -68,4 +68,3 @@ Cookie.schema.post('remove', function () {
 });
 
 Cookie.register();
-//keystoned.cookies.banner.genera();

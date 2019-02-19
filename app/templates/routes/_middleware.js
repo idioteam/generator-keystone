@@ -33,6 +33,8 @@ exports.initLocals = function (req, res, next) {
 	res.locals.impostazioni = keystone.get('impostazioni');
 	//	il numero di cookies presenti nella cookie policy
 	res.locals.mostra_banner_cookies = keystone.get('mostra_banner_cookie');
+	// link privacy policies
+	res.locals.privacy_links = keystone.get('privacy_links');
 	//	Importo utility di pug
 	res.locals.pug_utils = pug_utils;
 	

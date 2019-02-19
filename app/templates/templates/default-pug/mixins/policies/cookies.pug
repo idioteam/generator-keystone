@@ -46,9 +46,11 @@ mixin cookie_table (tipo, key, prima_parte)
 			+cookie-cell(cookie.descrizione, classi.descrizione, { class: 'cc-descrizione' })
 //-	Th
 mixin cookie-header (testo, classe, options)
+	-options = options || {};
 	.th(class=classe)&attributes(options) #{testo}
 		block
 //-	Td
 mixin cookie-cell (testo, classe, options)
+	-options = options || {};
 	.td(class=classe)&attributes(options) #{testo}
 		block

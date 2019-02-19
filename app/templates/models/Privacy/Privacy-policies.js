@@ -34,7 +34,7 @@ PrivacyPolicies.schema.pre('save', function (next) {
 
 PrivacyPolicies.schema.post('save', aggiorna_privacy_links);
 PrivacyPolicies.schema.post('update', aggiorna_privacy_links);
-
+PrivacyPolicies.schema.statics.get_links = aggiorna_privacy_links;
 PrivacyPolicies.register();
 aggiorna_privacy_links();
 

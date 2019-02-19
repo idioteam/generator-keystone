@@ -67,6 +67,10 @@ keystone.start({
 			keystoned.cookies.banner.genera();
 		}
 		
+		if (keystone.list('PrivacyPolicies')) {
+			keystone.list('PrivacyPolicies').schema.statics.get_links();
+		}
+		
 	},
 	onHttpServerCreated: function () {
 		//

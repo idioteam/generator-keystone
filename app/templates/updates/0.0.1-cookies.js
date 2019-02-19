@@ -1,6 +1,6 @@
 exports.create = {
 	CookiesList: [
-		{ categoria: 'TE', name: 'consenso-cookies', terzaParte: false, 'durata.um': 'anno/i', 'durata.qta': 1, secure: false, path: '/' },
+		{ categoria: 'TE', name: 'consenso-cookies', terzaParte: false, 'durata.um': 'anno/i', 'durata.qta': 1, secure: false, path: '/', descrizione: 'Questo cookie viene settato quando l\'utente acconsente all\'utilizzo dei cookies' },
 	],
 	CookiesBanner: [
 		{ chiave: 'background', valore: '#FFFFFF', info: 'Colore di sfondo del banner' },
