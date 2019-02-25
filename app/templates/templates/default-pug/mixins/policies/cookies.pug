@@ -1,4 +1,9 @@
-mixin elencoCookie(tipo)
+//- Mixin per 
+mixin cookie_check(tipo)
+	if cookies.cookies_auth && cookies.cookies_auth[tipo]
+		block
+//-	Mixin per generare la pagina della cookie policy
+mixin elenco_cookie(tipo)
 	h2.cookie-group(id=tipo.codice)!= tipo.nome
 	br
 	small!= tipo.descrizione
@@ -30,27 +35,27 @@ mixin cookie_table (tipo, key, prima_parte)
 
 	div.table.row(id=key + (prima_parte ? '-pp' : '-tp') + '-lista')
 		//- Intestazioni
-		+cookie-header('Nome', classi.nome)
-		+cookie-header('Durata', classi.durata)
+		+cookie_header('Nome', classi.nome)
+		+cookie_header('Durata', classi.durata)
 		if tipo.codice === 'AN' || tipo.codice === 'PR'
-			+cookie-header('Dominio', classi.dominio)
-			+cookie-header('Consenso', classi.consenso, { class: 'cc-consenso' })
+			+cookie_header('Dominio', classi.dominio)
+			+cookie_header('Consenso', classi.consenso, { class: 'cc-consenso' })
 		//- Celle
 		each cookie in tipo[prima_parte ? 'pp' : 'tp']
-			+cookie-cell(cookie.name, classi.nome)
-			+cookie-cell((cookie.durata.um === 'sessione' ? 'Sessione' : cookie.durata.qta + ' ' + cookie.durata.um), classi.durata)
+			+cookie_cell(cookie.name, classi.nome)
+			+cookie_cell((cookie.durata.um === 'sessione' ? 'Sessione' : cookie.durata.qta + ' ' + cookie.durata.um), classi.durata)
 			if tipo.codice === 'AN' || tipo.codice === 'PR'
-				+cookie-cell(cookie.domain, classi.dominio)
-				+cookie-cell(null, classi.consenso, { class: 'cc-consenso' })
+				+cookie_cell(cookie.domain, classi.dominio)
+				+cookie_cell(null, classi.consenso, { class: 'cc-consenso' })
 					a(target="_blank")&attributes({ href: (cookie.terzaParte ? cookie.linkDisattivazione : '/opt-out/?id=' + cookie.name) }) Link
-			+cookie-cell(cookie.descrizione, classi.descrizione, { class: 'cc-descrizione' })
+			+cookie_cell(cookie.descrizione, classi.descrizione, { class: 'cc-descrizione' })
 //-	Th
-mixin cookie-header (testo, classe, options)
+mixin cookie_header (testo, classe, options)
 	-options = options || {};
 	.th(class=classe)&attributes(options) #{testo}
 		block
 //-	Td
-mixin cookie-cell (testo, classe, options)
+mixin cookie_cell (testo, classe, options)
 	-options = options || {};
 	.td(class=classe)&attributes(options) #{testo}
 		block

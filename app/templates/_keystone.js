@@ -58,6 +58,8 @@ keystone.set('nav', {
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({
 	onMount: function () {
+
+		keystone.set('start_time', new Date().getTime());
 		
 		if (keystone.get('env') === 'production' && keystoned.minify_js) {
 			keystoned.minify_js.minify();

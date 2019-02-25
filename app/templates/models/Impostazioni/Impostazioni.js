@@ -45,6 +45,10 @@ Impostazioni.schema.statics.aggiorna = function () {
 			});
 
 			//	Completamento dati
+			if (!settings.azienda.nome_breve) {
+				settings.azienda.nome_breve = settings.azienda.nome;
+			}
+
 			_autocompleta_loghi(settings);
 			if (settings.indirizzo) {
 				settings.indirizzo.completo = _autocompleta_indirizzo(settings.indirizzo);

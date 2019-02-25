@@ -2,6 +2,7 @@ exports.create = {
 	Impostazioni: [
 		//	Azienda
 		{ chiave: 'azienda.nome',         			valore: '',      info: 'Ragione sociale o nome'},
+		{ chiave: 'azienda.nome_breve',         	valore: '',      info: 'Nome breve dell\'azienda'},
 		{ chiave: 'azienda.piva',         			valore: '',      info: 'Partita IVA'},
 		{ chiave: 'azienda.cf',           			valore: '',      info: 'Codice fiscale'},
 		//	Contatti

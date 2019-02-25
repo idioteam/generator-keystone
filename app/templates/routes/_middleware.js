@@ -9,6 +9,7 @@
  */
 var _ = require('lodash');
 var keystone = require('keystone');
+const cookies_mw = require('./middlewares/cookies')();
 const pug_utils = require('./middlewares/pug');
 
 /**
@@ -24,15 +25,16 @@ exports.initLocals = function (req, res, next) {
 		{ label: 'Home', key: 'home', href: '/' }
 	];
 	res.locals.user = req.user;
-
+	//	Timestamp avvio
+	res.locals.start_time = '?_t=' + keystone.get('start_time');
 	//	Rendo disponibile ai template la variabile env
 	res.locals.env = keystone.get('env');
 	//	il path della pagina
 	res.locals.path = req.path;
 	//	le impostazioni del progetto
 	res.locals.impostazioni = keystone.get('impostazioni');
-	//	il numero di cookies presenti nella cookie policy
-	res.locals.mostra_banner_cookies = keystone.get('mostra_banner_cookie');
+	//	preferenze utente sui cookies
+	res.locals.cookies = cookies_mw(req.cookies, keystone.get('mostra_banner_cookie'));
 	// link privacy policies
 	res.locals.privacy_links = keystone.get('privacy_links');
 	//	Importo utility di pug
