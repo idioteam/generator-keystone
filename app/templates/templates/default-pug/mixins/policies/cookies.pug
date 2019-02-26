@@ -23,14 +23,14 @@ mixin cookie_table (tipo, key, prima_parte)
 			nome: 'col-md-6',
 			durata: 'col-md-6',
 			dominio: null,
-			consenso: null,
+			// consenso: null,
 			descrizione: 'col-md-12'
 		}
 
 		if (tipo.codice === 'AN' || tipo.codice === 'PR') {
 			classi.durata = 'col-md-2'
 			classi.dominio = 'col-md-2';
-			classi.consenso = 'col-md-2';
+			// classi.consenso = 'col-md-2';
 		}
 
 	div.table.row(id=key + (prima_parte ? '-pp' : '-tp') + '-lista')
@@ -39,14 +39,14 @@ mixin cookie_table (tipo, key, prima_parte)
 		+cookie_header('Durata', classi.durata)
 		if tipo.codice === 'AN' || tipo.codice === 'PR'
 			+cookie_header('Dominio', classi.dominio)
-			+cookie_header('Consenso', classi.consenso, { class: 'cc-consenso' })
+			// +cookie_header('Consenso', classi.consenso, { class: 'cc-consenso' })
 		//- Celle
 		each cookie in tipo[prima_parte ? 'pp' : 'tp']
 			+cookie_cell(cookie.name, classi.nome)
 			+cookie_cell((cookie.durata.um === 'sessione' ? 'Sessione' : cookie.durata.qta + ' ' + cookie.durata.um), classi.durata)
 			if tipo.codice === 'AN' || tipo.codice === 'PR'
 				+cookie_cell(cookie.domain, classi.dominio)
-				+cookie_cell(null, classi.consenso, { class: 'cc-consenso' })
+				// +cookie_cell(null, classi.consenso, { class: 'cc-consenso' })
 					a(target="_blank")&attributes({ href: (cookie.terzaParte ? cookie.linkDisattivazione : '/opt-out/?id=' + cookie.name) }) Link
 			+cookie_cell(cookie.descrizione, classi.descrizione, { class: 'cc-descrizione' })
 //-	Th

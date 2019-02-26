@@ -5,6 +5,8 @@ exports.create = {
 		{ chiave: 'azienda.nome_breve',         	valore: '',      info: 'Nome breve dell\'azienda'},
 		{ chiave: 'azienda.piva',         			valore: '',      info: 'Partita IVA'},
 		{ chiave: 'azienda.cf',           			valore: '',      info: 'Codice fiscale'},
+		{ chiave: 'azienda.capitale_sociale',       valore: '',      info: 'Capitale sociale'},
+		{ chiave: 'azienda.rea',       				valore: '',      info: 'Numero REA'},
 		//	Contatti
 		{ chiave: 'contatti.email',        			valore: '',      info: 'Email principale'},
 		{ chiave: 'contatti.telefono',     			valore: '',      info: 'Recapito telefonico principale'},

@@ -45,7 +45,7 @@ Impostazioni.schema.statics.aggiorna = function () {
 			});
 
 			//	Completamento dati
-			if (!settings.azienda.nome_breve) {
+			if (settings.azienda && settings.azienda.nome && !settings.azienda.nome_breve) {
 				settings.azienda.nome_breve = settings.azienda.nome;
 			}
 
@@ -63,7 +63,8 @@ Impostazioni.schema.statics.aggiorna = function () {
 
 //	Trasforma il valore di chiave rendendolo simile ad un oggetto
 Impostazioni.schema.pre('save', function (next) {
-	this.chiave = keystone.utils.slug(this.chiave.trim(), '.');
+	// this.chiave = keystone.utils.slug(this.chiave.trim(), '.');
+	this.chiave = keystone.utils.slug(this.chiave.trim().replace(/\./g, ' '), '.');
 	next();
 });
 

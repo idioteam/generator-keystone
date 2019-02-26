@@ -8,7 +8,7 @@ exports = module.exports = function (req, res) {
 
 	// locals.section is used to set the currently selected
 	locals.section = 'cookie';
-	locals.cookies = get_empty_cookie_object();
+	locals.cookies = get_empty_cookie_object(locals.cookies);
 
 	view.on('init', function (next) {
 
@@ -19,8 +19,8 @@ exports = module.exports = function (req, res) {
 					console.error('Errore get lista cookies: ', err);
 					next(err);
 				}
-				locals.cookies.numero = result.length;
-				result.forEach(c => { locals.cookies.list[c._id][c.cookies.tp ? 'tp' : 'pp'] = c.cookies.lista });
+				locals.cookies.policy.numero = result.length;
+				result.forEach(c => { locals.cookies.policy.list[c._id][c.cookies.tp ? 'tp' : 'pp'] = c.cookies.lista });
 				next();
 			});
 
@@ -30,7 +30,7 @@ exports = module.exports = function (req, res) {
 		keystone.list('CookiesList').model.findOne().sort({ updatedAt: -1 })
 			.exec(function (err, result) {
 				if (result) {
-					locals.cookies.ultimoAggiornamento = moment(result.updatedAt).format('DD/MM/YYYY');
+					locals.cookies.policy.ultimoAggiornamento = moment(result.updatedAt).format('DD/MM/YYYY');
 				}
 				next(err);
 			});
@@ -40,7 +40,7 @@ exports = module.exports = function (req, res) {
 
 		keystone.list('CookiesContents').model.find({ stato: 'Attivo' }).sort({ sortOrder: 1 })
 			.exec(function (err, result) {
-				locals.cookies.pars = result.map(r => dati_inserisci(r, res.locals.impostazioni));
+				locals.cookies.policy.pars = result.map(r => dati_inserisci(r, res.locals.impostazioni));
 				next(err);
 			});
 
@@ -51,42 +51,44 @@ exports = module.exports = function (req, res) {
 };
 
 // Ritorna l'oggetto per passare i dati dei cookie alle locals
-function get_empty_cookie_object () {
-	return {
-		list: {
-			TE: {
-				nome: 'Cookie tecnici',
-				codice: 'TE',
-				descrizione: 'Strettamente necessari per il funzionamento del sito',
-				pp: [],
-				tp: [],
+function get_empty_cookie_object (local_cookies) {
+	return Object.assign(local_cookies || {},{
+		policy: {
+			list: {
+				TE: {
+					nome: 'Cookie tecnici',
+					codice: 'TE',
+					descrizione: 'Strettamente necessari per il funzionamento del sito',
+					pp: [],
+					tp: [],
+				},
+				AN: {
+					nome: 'Cookie analitici',
+					codice: 'AN',
+					descrizione: 'Tracciano le interazioni degli utenti sul sito in forma aggregata',
+					pp: [],
+					tp: [],
+				},
+				PR: {
+					nome: 'Cookie di profilazione',
+					codice: 'PR',
+					descrizione: 'Tracciano le preferenze degli utenti sul sito in forma aggregata',
+					pp: [],
+					tp: [],
+				},
+				NC: {
+					nome: 'Cookie non classificati',
+					codice: 'NC',
+					descrizione: 'La loro funzione non è descritta',
+					pp: [],
+					tp: [],
+				},
 			},
-			AN: {
-				nome: 'Cookie analitici',
-				codice: 'AN',
-				descrizione: 'Tracciano le interazioni degli utenti sul sito in forma aggregata',
-				pp: [],
-				tp: [],
-			},
-			PR: {
-				nome: 'Cookie di profilazione',
-				codice: 'PR',
-				descrizione: 'Tracciano le preferenze degli utenti sul sito in forma aggregata',
-				pp: [],
-				tp: [],
-			},
-			NC: {
-				nome: 'Cookie non classificati',
-				codice: 'NC',
-				descrizione: 'La loro funzione non è descritta',
-				pp: [],
-				tp: [],
-			},
-		},
-		ultimoAggiornamento: '',
-		pars: [],
-		numero: 0,
-	};
+			ultimoAggiornamento: '',
+			pars: [],
+			numero: 0,
+		}
+	});
 }
 
 const aggregation_query = [

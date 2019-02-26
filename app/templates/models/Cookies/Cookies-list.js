@@ -25,13 +25,13 @@ const Cookie = new keystone.List('CookiesList', {
 	plural: 'Cookies',
 	map: { name: 'name' },
 	autokey: {
-		from: 'name domain',
+		from: 'name dominio',
 		path: 'slug',
 		unique: true,
 	},
 	nodelete: false,
 	track: true,
-	defaultSort: 'name domain',
+	defaultSort: 'name dominio',
 });
 
 Cookie.add({
@@ -51,13 +51,13 @@ Cookie.add({
 	{ heading: 'Terza parte' },
 	{
 		terzaParte: { type: Boolean, initial: true, label: 'Terza parte' },
-		domain: { type: String, initial: true, required: true, label: 'Dominio', default: 'localhost', dependsOn: { terzaParte: true }},
+		dominio: { type: String, initial: true, required: true, label: 'Dominio', default: 'localhost', dependsOn: { terzaParte: true }},
 		linkDisattivazione: { type: String, label: 'Link disattivazione', dependsOn: { terzaParte: true } },
 	},
 
 );
 
-Cookie.defaultColumns = 'name, domain, path, value, terzaParte, categoria, descrizione';
+Cookie.defaultColumns = 'name, dominio, path, value, terzaParte, categoria, descrizione';
 
 Cookie.schema.post('save', function () {
 	keystoned.cookies.banner.genera();

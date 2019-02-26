@@ -3,26 +3,26 @@ include ../../mixins/policies/cookies
 include  ../../mixins/policies/privacy
 
 block css
-	link(href="/styles/policies/cookies.css", rel="stylesheet")
+	link(href="/styles/policies/policies.css", rel="stylesheet")
 block content
 	-
-	//- creo un paragrafo finale per la lista dei cookies
+		//- creo un paragrafo finale per la lista dei cookies
 		var paragrafo_lista_cookies = {titolo: 'Cookies utilizzati dal sito web', testo: ' '};
 	//- creo un paragrafo iniziale vuoto per inserire il primo 
 		cookies.pars.unshift({titolo:'',testo:''});
 	.container: .privacy-policy
 		h1 Cookie policy
-			if cookies.ultimoAggiornamento
+			if cookies.policy.ultimoAggiornamento
 				br
-				small ultimo aggiornamento: #{cookies.ultimoAggiornamento}
-		each d, i in cookies.pars
-			+paragrafo(cookies.pars[i], i)
+				small ultimo aggiornamento: #{cookies.policy.ultimoAggiornamento}
+		each d, i in cookies.policy.pars
+			+paragrafo(cookies.policy.pars[i], i)
 			if i === 0
-				+sommario(cookies.pars, [paragrafo_lista_cookies])
+				+sommario(cookies.policy.pars, [paragrafo_lista_cookies])
 		+paragrafo(paragrafo_lista_cookies, 1)
-			if cookies.numero
+			if cookies.policy.numero
 				div.lista-cookies
-					each tipo in cookies.lista
+					each tipo in cookies.policy.lista
 						if tipo.pp.length > 0 || tipo.tp.length > 0
 							+elenco_cookie(tipo)
 			else

@@ -34,7 +34,7 @@ exports.initLocals = function (req, res, next) {
 	//	le impostazioni del progetto
 	res.locals.impostazioni = keystone.get('impostazioni');
 	//	preferenze utente sui cookies
-	res.locals.cookies = cookies_mw(req.cookies, keystone.get('mostra_banner_cookie'));
+	res.locals.cookies = cookies_mw(req.cookies, keystone.get('cookies_mostra_banner'));
 	// link privacy policies
 	res.locals.privacy_links = keystone.get('privacy_links');
 	//	Importo utility di pug
