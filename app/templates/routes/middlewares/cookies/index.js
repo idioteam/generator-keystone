@@ -3,6 +3,7 @@
  * @param cookies_list - oggetto contenente i cookies, tipicamente express.cookies
  * @param numero_cookies_censiti - numero di cookies. se 0 il banner non viene visualizzato
  */
+const keystone = require('keystone');
 let cookie_preferenze_utente = 'preferenze-cookies';
 
 function parse_cookies (cookies_list, numero_cookies_censiti) {
