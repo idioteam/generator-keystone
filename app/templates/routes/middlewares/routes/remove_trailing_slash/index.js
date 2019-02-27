@@ -1,3 +1,9 @@
+/**
+ * Rimozione dell'eventuale slash finale nelle routes
+ * @param req
+ * @param res
+ * @param next
+ */
 module.exports = function (req, res, next) {
 
 	// Verifico metodo della richiesta

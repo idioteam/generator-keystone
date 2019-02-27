@@ -43,6 +43,7 @@ keystone.set('locals', {
 	env: keystone.get('env'),
 	utils: keystone.utils,
 	editable: keystone.content.editable,
+	start_time: '?_t=' + keystone.get('start_time')
 });
 
 // Load your project's Routes
@@ -58,8 +59,6 @@ keystone.set('nav', {
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({
 	onMount: function () {
-
-		keystone.set('start_time', new Date().getTime());
 		
 		if (keystone.get('env') === 'production' && keystoned.minify_js) {
 			keystoned.minify_js.minify();
@@ -82,5 +81,6 @@ keystone.start({
 	},
 	onStart: function () {
 		//
+		console.log('Start time:', new Date(keystone.get('start_time')));
 	},
 });

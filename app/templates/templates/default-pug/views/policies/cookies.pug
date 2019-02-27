@@ -22,7 +22,7 @@ block content
 		+paragrafo(paragrafo_lista_cookies, 1)
 			if cookies.policy.numero
 				div.lista-cookies
-					each tipo in cookies.policy.lista
+					each tipo in cookies.policy.list
 						if tipo.pp.length > 0 || tipo.tp.length > 0
 							+elenco_cookie(tipo)
 			else

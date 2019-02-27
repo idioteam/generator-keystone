@@ -387,7 +387,8 @@ KeystoneGenerator.prototype.routes = function routes () {
 	this.mkdir('routes/middlewares/pug');
 
 	this.template('routes/_index.js', 'routes/index.js');
-	this.template('routes/_middleware.js', 'routes/middleware.js');
+	// disabilitato perchè ho modificato la struttura dei middlewares
+	// this.template('routes/_middleware.js', 'routes/middleware.js');
 
 	// if (this.includeEmail) {
 	// 	this.template('routes/_emails.js', 'routes/emails.js');

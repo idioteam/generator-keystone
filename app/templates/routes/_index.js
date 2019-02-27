@@ -20,15 +20,20 @@
 
 const keystone = require('keystone');
 const keystoned = require('keystoned');
-const middleware = require('./middleware');
-const express_middlewares = require('./middlewares/express');
-const importRoutes = keystone.importer(__dirname);
+const middlewares = require('./middlewares');
 
-// Common Middleware
-keystone.pre('routes', middleware.initLocals);
-keystone.pre('render', middleware.flashMessages);
+// Middlewares
+// Pre routes
+keystone.pre('routes', middlewares.routes.remove_trailing_slash);
+keystone.pre('routes', middlewares.errors);
+keystone.pre('routes', middlewares.locals.pre_routes);
+keystone.pre('routes', middlewares.cookies);
+// Pre render
+// keystone.pre('render', middlewares.pug);
+// keystone.pre('render', middlewares.flash_messages);
 
 // Import Route Controllers
+const importRoutes = keystone.importer(__dirname);
 const routes = {
 	policies: importRoutes('./policies'),
 	views: importRoutes('./views'),
@@ -36,9 +41,6 @@ const routes = {
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
-
-	//	Rimozione trailing slashes con redirect 301
-	app.use(express_middlewares.remove_trailing_slash);
 	
 	// Views
 	app.get('/', routes.views.index);

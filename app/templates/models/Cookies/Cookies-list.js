@@ -53,8 +53,7 @@ Cookie.add({
 		terzaParte: { type: Boolean, initial: true, label: 'Terza parte' },
 		dominio: { type: String, initial: true, required: true, label: 'Dominio', default: 'localhost', dependsOn: { terzaParte: true }},
 		linkDisattivazione: { type: String, label: 'Link disattivazione', dependsOn: { terzaParte: true } },
-	},
-
+	}
 );
 
 Cookie.defaultColumns = 'name, dominio, path, value, terzaParte, categoria, descrizione';
