@@ -41,7 +41,6 @@ Cookie.add({
 		categoria: { type: Types.Select, options: cookie_select.categoria, initial: true, required: true, label: 'Categoria' },
 		descrizione: { type: String, initial: true, label: 'Descrizione' },
 	},
-	{ heading: 'Durata' },
 	{
 		durata: {
 			um: { type: Types.Select, options: cookie_select.um, initial: true, required: true, label: 'Durata - Unità di misura' },
@@ -56,7 +55,7 @@ Cookie.add({
 	}
 );
 
-Cookie.defaultColumns = 'name, dominio, path, value, terzaParte, categoria, descrizione';
+Cookie.defaultColumns = 'name, dominio, path, terzaParte, categoria, descrizione';
 
 Cookie.schema.post('save', function () {
 	keystoned.cookies.banner.genera();

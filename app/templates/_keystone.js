@@ -8,6 +8,7 @@ var keystone = require('keystone');
 const keystoned = require('keystoned');
 keystoned.init({
 	config: process.env.NODE_ENV,
+	i18n: false,
 	minify_js: true,
 	model_queries: true,
 	sitemap: true,
@@ -81,6 +82,5 @@ keystone.start({
 	},
 	onStart: function () {
 		//
-		console.log('Start time:', new Date(keystone.get('start_time')));
 	},
 });

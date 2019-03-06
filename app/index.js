@@ -357,6 +357,9 @@ KeystoneGenerator.prototype.project = function project () {
 	this.mkdir('cert');
 	this.directory('cert');
 
+	this.mkdir('lib');
+	this.directory('lib');
+
 	// Readme
 	this.copy('_README.md', 'README.md');
 
