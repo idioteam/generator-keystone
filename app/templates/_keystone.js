@@ -51,11 +51,19 @@ keystone.set('locals', {
 keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
-keystone.set('nav', {
+const nav = {
 	'cookie policy': ['CookiesContents', 'CookiesList', 'CookiesBanner'],
 	'privacy policy': ['PrivacyPolicies', 'PrivacyContents'],
-	'altre impostazioni': ['Impostazioni', 'users']
-});
+	'impostazioni': ['Impostazioni', 'users']
+};
+//	Modelli condizionali
+if (keystone.lists.Traduzioni) {
+	nav.impostazioni.push('Traduzioni');
+}
+//	Ordino il gruppo impostazioni
+nav.impostazioni.sort();
+
+keystone.set('nav', nav);
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({

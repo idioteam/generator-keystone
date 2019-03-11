@@ -1,11 +1,18 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
-
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
+const Roles = require('keystone/lib/list/roles/list');
 /**
  * <%= userModel %> Model
  * ==========
  */
-var <%= userModel %> = new keystone.List('<%= userModel %>');
+const <%= userModel %> = new keystone.List('<%= userModel %>',{
+	label: 'Utenti',
+	singular: 'Utente',
+	plural: 'Utente',
+	ui_can_add: 'admin',
+	ui_can_delete: 'admin',
+	ui_can_edit: 'admin',
+});
 
 <%= userModel %>.add({
 	name: { type: Types.Name, required: true, index: true },
@@ -13,6 +20,7 @@ var <%= userModel %> = new keystone.List('<%= userModel %>');
 	password: { type: Types.Password, initial: true, required: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
+	role: { type: Types.Select, options: Roles },
 });
 
 // Provide access to Keystone
