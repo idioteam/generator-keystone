@@ -9,7 +9,7 @@
 
 exports.create = {
 	<%= userModel %>: [
-		{ 'name.first': 'Admin', 'name.last': 'User', 'email': '<%= adminLogin %>', 'password': '<%= adminPassword %>', 'isAdmin': true },
+		{ 'name.first': 'Admin', 'name.last': 'User', 'email': '<%= adminLogin %>', 'password': '<%= adminPassword %>', 'isAdmin': true, role: 'admin' },
 	],
 };
 
