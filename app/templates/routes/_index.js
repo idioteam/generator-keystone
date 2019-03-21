@@ -29,7 +29,7 @@ keystone.pre('routes', middlewares.errors);
 keystone.pre('routes', middlewares.locals.pre_routes);
 keystone.pre('routes', middlewares.cookies);
 // Pre render
-// keystone.pre('render', middlewares.pug);
+keystone.pre('render', middlewares.pug);
 // keystone.pre('render', middlewares.flash_messages);
 
 // Import Route Controllers
