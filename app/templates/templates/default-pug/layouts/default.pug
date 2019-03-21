@@ -130,6 +130,8 @@ html(lang='it')&attributes(seo.attributes)
 		//- Add scripts that are globally required by your site here.
 		//-idiojs:dev
 		if env !== 'production'
+			script(src='/js/app/app.js')
+			script(src='/js/main.js')
 			script(src='/js/site/offcanvas.js')
 		//-idiojs:end
 		//-idiojs:prod
