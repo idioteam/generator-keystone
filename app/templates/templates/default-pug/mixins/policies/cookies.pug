@@ -5,9 +5,13 @@ mixin cookie_check(tipo)
 //-	Mixin per generare la pagina della cookie policy
 mixin elenco_cookie(tipo)
 	h2.cookie-group(id=tipo.codice)!= tipo.nome
-	br
 	small!= tipo.descrizione
-
+	if tipo.codice !== 'TE' && cookies.policy.consenti_disattivazione === 'S'
+		- var nome_input = 'cookie_' + (tipo.codice === 'PR' ? 'profilazione' : 'analitici');
+		small.opt-inline-container
+			label(for=nome_input) disabilita questa classe di cookies
+				span.opt-switch
+					input(id=nome_input type='checkbox' checked=cookies.policy.consenso[tipo.codice.toLowerCase()] === 'D')
 	if tipo.pp.length > 0
 		h3.text-uppercase(id=tipo.codice + '-pp') Prima parte
 		+cookie_table(tipo, tipo.codice, true)

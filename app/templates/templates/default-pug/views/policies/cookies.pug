@@ -27,3 +27,14 @@ block content
 							+elenco_cookie(tipo)
 			else
 				div Questo sito non utilizza cookies.
+		.privacy-policy__container
+			.privacy-policy__titolo.privacy-policy__titolo--sticky
+			.privacy-policy__paragrafo.privacy-policy__paragrafo--sticky
+				h4.text-right
+					span.consenti(onclick='consenti()') proseguendo la navigazione si accetta la presente cookie policy >>
+block js
+	script.
+		function consenti() {
+			new Banner(true).setCookie();
+			document.location = '/';
+		}

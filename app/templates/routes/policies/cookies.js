@@ -27,13 +27,25 @@ exports = module.exports = function (req, res) {
 	});
 
 	view.on('init', function (next) {
-		keystone.list('CookiesList').model.findOne().sort({ updatedAt: -1 })
+		//	Data di aggiornamento dell'elenco dei cookie = data di aggiornamento del cookie non tecnico più recente
+		keystone.list('CookiesList').model.findOne({ categoria: { $ne: 'TE' } }).sort({ updatedAt: -1 })
 			.exec(function (err, result) {
 				if (result) {
 					locals.cookies.policy.ultimoAggiornamento = moment(result.updatedAt).format('DD/MM/YYYY');
 				}
 				next(err);
 			});
+	});
+
+	view.on('init', function (next) {
+
+		keystone.list('CookieBanner').model.findOne({ slug: 'consenti_disattivazione' }, (err, result) => {
+			if (result) {
+				locals.data.consenti_disattivazione = result.valore;
+			}
+			next();
+		});
+
 	});
 
 	view.on('init', function (next) {
@@ -85,6 +97,12 @@ function get_empty_cookie_object (local_cookies) {
 				},
 			},
 			ultimoAggiornamento: '',
+			consenso: {
+				cd: null,
+				an: 'D',
+				pr: 'D',
+			},
+			consenti_disattivazione: 'N',
 			pars: [],
 			numero: 0,
 		}
