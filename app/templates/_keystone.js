@@ -12,6 +12,7 @@ keystoned.init({
 	minify_js: true,
 	model_queries: true,
 	sitemap: true,
+	seo: true,
 });
 
 keystone.init({
