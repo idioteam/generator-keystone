@@ -6,13 +6,13 @@
  * NODE_ENV=developement
  * oppure rimuovere la proprietà
  *
- * Da utilizzare durante lo sviluppo
+ * Da utilizzare durante lo sviluppo con DB sulla propria macchina
  */
 module.exports = {
 	db: {
 		name: '<%= projectName %>',
 		port: 27017,
-		host: 'idiocloud',
+		host: 'localhost',
 	},
 	port: 3001
 };

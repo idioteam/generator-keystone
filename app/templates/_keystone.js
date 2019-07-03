@@ -8,7 +8,7 @@ var keystone = require('keystone');
 const keystoned = require('keystoned');
 keystoned.init({
 	config: process.env.NODE_ENV,
-	i18n: false,
+	i18n: true,
 	minify_js: true,
 	model_queries: true,
 	sitemap: true,

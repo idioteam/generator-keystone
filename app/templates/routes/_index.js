@@ -24,6 +24,7 @@ const middlewares = require('./middlewares');
 
 // Middlewares
 // Pre routes
+keystoned.i18n.middlewares.browse();
 keystone.pre('routes', middlewares.routes.remove_trailing_slash);
 keystone.pre('routes', middlewares.errors);
 keystone.pre('routes', middlewares.locals.pre_routes);
@@ -35,15 +36,18 @@ keystone.pre('render', middlewares.pug);
 // Import Route Controllers
 const importRoutes = keystone.importer(__dirname);
 const routes = {
+	api: importRoutes('./api'),
 	policies: importRoutes('./policies'),
 	views: importRoutes('./views'),
 };
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
+	const middlewares = [keystoned.seo.middleware];
+	keystoned.i18n.routes.init(app);
 	
 	// Views
-	app.get('/', routes.views.index);
+	keystoned.i18n.routes.set('/', middlewares, routes.views.index);
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
