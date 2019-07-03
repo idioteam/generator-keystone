@@ -93,6 +93,7 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 		this.userModel = 'User';
 		this.userModelPath = utils.keyToPath(this.userModel, true);
 		this.destinationRoot(utils.slug(this.projectName));
+		this.dbName = utils.slug(this.projectName);
 		this.includeEmail = true;
 		this.includeBlog = true;
 		this.includeGallery = true;
@@ -151,7 +152,7 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 				type: 'confirm',
 				name: 'newDirectory',
 				message: 'Vuoi creare una nuova directory per il progetto?',
-				default: false,
+				default: true,
 			}, /* {
 				type: 'confirm',
 				name: 'includeEmail',
@@ -175,6 +176,7 @@ KeystoneGenerator.prototype.prompts = function prompts () {
 		this._projectName = this.projectName;
 		// ... then escape it for use in strings (most cases)
 		this.projectName = utils.escapeString(this.projectName);
+		this.dbName = utils.slug(this.projectName);
 		// Escape other inputs
 		// Hardcoded!
 		this.adminLogin = 'idiotest@nsi.it';
@@ -359,6 +361,9 @@ KeystoneGenerator.prototype.project = function project () {
 
 	this.mkdir('lib');
 	this.directory('lib');
+	
+	this.mkdir('locales');
+	this.directory('locales');
 
 	// Readme
 	this.copy('_README.md', 'README.md');
@@ -387,6 +392,7 @@ KeystoneGenerator.prototype.routes = function routes () {
 
 	this.mkdir('routes');
 	this.mkdir('routes/views');
+	this.mkdir('routes/api');
 	this.mkdir('routes/middlewares/pug');
 
 	this.template('routes/_index.js', 'routes/index.js');
@@ -398,6 +404,7 @@ KeystoneGenerator.prototype.routes = function routes () {
 	// }
 
 	this.copy('routes/views/index.js');
+	this.directory('routes/api');
 	this.directory('routes/middlewares');
 	this.directory('routes/policies');
 

@@ -1,1 +1,0 @@
-// Needed for yeoman generation, otherwise the folder wouldn't be created

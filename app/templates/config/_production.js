@@ -9,7 +9,7 @@
  */
 module.exports = {
 	'db': {
-		name: '<%= projectName %>',
+		name: '<%= dbName %>',
 		port: 27017,
 		host: 'localhost',
 	},
