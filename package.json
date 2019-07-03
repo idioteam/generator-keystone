@@ -1,7 +1,7 @@
 {
-  "name": "generator-keystone",
-  "version": "0.5.1",
-  "description": "A KeystoneJS Project Generator for Yeoman",
+  "name": "generator-keystone-nsi",
+  "version": "0.1.0",
+  "description": "A custom KeystoneJS Project Generator for Yeoman, made by NSI",
   "keywords": [
     "yeoman-generator",
     "keystonejs",

@@ -5,8 +5,8 @@
   "dependencies": {
     "async": "2.1.4",
     "dotenv": "4.0.0",
-    "keystone": "git+https://github.com/yazevedopure/keystone.git",
-    "keystoned": "git+https://github.com/yazevedopure/keystoned.git",
+    "keystone": "git+https://github.com/idioteam/keystone.git",
+    "keystoned": "git+https://github.com/idioteam/keystoned.git",
     "keystone-email": "1.0.5",
     "lodash": "^4.13.1",
     "node-sass": "4.5.0",
