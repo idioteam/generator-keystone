@@ -50,11 +50,12 @@ html(lang='it')&attributes(seo.attributes)
 					span.navbar-toggler-icon
 				.offcanvas-collapse.navbar-collapse#navbar_collapse
 					ul.navbar-nav.mr-auto
-						each link in navLinks
-							li.nav-item(class=(section === link.key ? 'active' : null))
-								a.nav-link(href=link.href)= link.label
-								if section === link.key
-									span.sr-only (current)
+						if(navLinks && navLinks.length > 0)
+							each link in navLinks
+								li.nav-item(class=(section === link.key ? 'active' : null))
+									a.nav-link(href=link.href)= link.label
+									if section === link.key
+										span.sr-only (current)
 									
 		//-#header: .container
 

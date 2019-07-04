@@ -27,6 +27,7 @@ const middlewares = require('./middlewares');
 keystoned.i18n.middlewares.browse();
 keystone.pre('routes', middlewares.routes.remove_trailing_slash);
 keystone.pre('routes', middlewares.errors);
+keystone.pre('routes', middlewares.locals.nav_links);
 keystone.pre('routes', middlewares.locals.pre_routes);
 keystone.pre('routes', middlewares.cookies);
 // Pre render
